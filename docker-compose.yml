@@ -23,7 +23,7 @@ services:
     ports:
       - "3000:3000"
     depends_on:
-      - mysql
+      - db
   front:
     container_name: front
     build: ./front
