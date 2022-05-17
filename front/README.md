@@ -1,4 +1,4 @@
-##########Vue Routerの追加##########
+########## Vue Routerの追加 ##########
 
 (1) docker exec -it front /bin/bash
 
@@ -87,4 +87,4 @@ npm run serve
 http://localhost:8080/
 http://localhost:8080/hello
 
-##########Vue Routerここまで##########
+########## Vue Routerここまで ##########
