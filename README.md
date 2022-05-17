@@ -1,4 +1,5 @@
 (1)最低限のファイルの作成(Dockerfileなど)
+
 (2)Railsプロジェクトの作成
 docker-compose run back rails new . --force --database=mysql --api
 
