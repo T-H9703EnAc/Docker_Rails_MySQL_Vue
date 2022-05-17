@@ -1,13 +1,29 @@
 (1)最低限のファイルの作成(Dockerfileなど)
 
 (2)Railsプロジェクトの作成
-docker-compose run back rails new . --force --database=mysql --api
+```:実行コマンド
+(実行コマンド)
 
+docker-compose run back rails new . --force --database=mysql --api
+```
 (3)CORSの設定
 Gemfile の修正
-gem 'rack-cors' のコメントアウト解除
+```:Gemfile
+(Gemfile一部抜粋)
+...
+gem 'rack-cors' #コメントアウト解除
+...
+```
+```:実行コマンド
+(実行コマンド)
+
 docker-compose run back bundle install
+```
+
 ./back/rails_project/config/initializers/cors.rb の修正
+```:cors.rb
+(cors.rb)
+
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
     origins 'http://localhost:8080'
@@ -17,8 +33,12 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
       methods: [:get, :post, :put, :patch, :delete, :options, :head]
   end
 end
+```
 
 (4)./back/rails_project/config/database.yml の修正
+```:database.yml
+(database.yml)
+
 default: &default
   adapter: mysql2
   encoding: utf8mb4
@@ -26,10 +46,18 @@ default: &default
   username: root
   password: root # 追加
   host: db # 修正
+```
 
 (5)イメージ作成
+```:実行コマンド
+(実行コマンド)
 docker-compose build
+```
 ※以下のようなエラーが出た場合は再度buildを実施
+```:エラーメッセージ
+(エラーメッセージ)
+
+=> ERROR [3/3] RUN npm install -g npm &&     npm install -g @vue/cli                                                                                                                   432.4s
 => ERROR [3/3] RUN npm install -g npm &&     npm install -g @vue/cli                                                                                                                   432.4s
 ------                                                                                                                                                                                         
  > [3/3] RUN npm install -g npm &&     npm install -g @vue/cli:                                                                                                                                
@@ -60,13 +88,26 @@ docker-compose build
 ------
 executor failed running [/bin/sh -c npm install -g npm &&     npm install -g @vue/cli]: exit code: 1
 ERROR: Service 'front' failed to build : Build failed
+```
 
 (5) DBの作成
+```:実行コマンド
+(実行コマンド)
+
 docker-compose run back rails db:create
+```
 ※./back/rails_project/db/mysql_data/... が作成されていない場合は以下のコマンドで再度実行する
+```:実行コマンド
+(実行コマンド)
+
 docker-compose down
 docker-compose up -d
+```
 ※以下のようなエラーが出た場合は、./back/rails_project/config/database.yml の修正に誤りがあるかも・・・
+
+```:エラーメッセージ
+(エラーメッセージ)
+
 Creating docker_rails_mysql_vue_back_run ... done
 Running via Spring preloader in process 19
 Can't connect to local MySQL server through socket '/run/mysqld/mysqld.sock' (2)
@@ -150,14 +191,19 @@ Mysql2::Error::ConnectionError: Can't connect to local MySQL server through sock
 Tasks: TOP => db:create
 (See full trace by running task with --trace)
 ERROR: 1
+```
 
 (6) Railsの動作確認
 http://localhost:3000/
 
-(7)docker exec -it front /bin/bash
+(7)Vue.js 環境の作成
+```:実行コマンド
+(実行コマンド)
+
+docker exec -it front /bin/bash
 root@796814ea4e34:/app# 
 
-(8)vue create .
+vue create .
 ?  Your connection to the default yarn registry seems to be slow.
    Use https://registry.npmmirror.com for faster installation? (Y/n) Y
   
@@ -213,6 +259,7 @@ added 95 packages in 1m
 
  WARN  Skipped git commit due to missing username and email in git config, or failed to sign commit.
        You will need to perform the initial commit yourself.
+```
 
 (9) Vue.jsの動作確認
 http://localhost:8080/ 
