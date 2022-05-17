@@ -152,3 +152,66 @@ ERROR: 1
 
 (6) Railsの動作確認
 http://localhost:3000/
+
+(7)docker exec -it front /bin/bash
+root@796814ea4e34:/app# 
+
+(8)vue create .
+?  Your connection to the default yarn registry seems to be slow.
+   Use https://registry.npmmirror.com for faster installation? (Y/n) Y
+  
+Vue CLI v5.0.4
+? Generate project in current directory? (Y/n) Y
+
+Vue CLI v5.0.4
+? Please pick a preset: (Use arrow keys)
+❯ Default ([Vue 3] babel, eslint) 
+  Default ([Vue 2] babel, eslint) 
+  Manually select features 
+
+Vue CLI v5.0.4
+? Please pick a preset: Default ([Vue 3] babel, eslint)
+? Pick the package manager to use when installing dependencies: 
+  Use Yarn 
+❯ Use NPM 
+
+
+?  Your connection to the default yarn registry seems to be slow.
+   Use https://registry.npmmirror.com for faster installation? Yes
+
+
+Vue CLI v5.0.4
+? Generate project in current directory? Yes
+
+
+Vue CLI v5.0.4
+? Please pick a preset: Default ([Vue 3] babel, eslint)
+? Pick the package manager to use when installing dependencies: NPM
+
+
+Vue CLI v5.0.4
+✨  Creating project in /app.
+🗃  Initializing git repository...
+⚙️  Installing CLI plugins. This might take a while...
+
+
+added 843 packages in 8m
+🚀  Invoking generators...
+📦  Installing additional dependencies...
+
+
+added 95 packages in 1m
+⚓  Running completion hooks...
+
+📄  Generating README.md...
+
+🎉  Successfully created project app.
+👉  Get started with the following commands:
+
+ $ npm run serve
+
+ WARN  Skipped git commit due to missing username and email in git config, or failed to sign commit.
+       You will need to perform the initial commit yourself.
+
+(9) Vue.jsの動作確認
+http://localhost:8080/ 
