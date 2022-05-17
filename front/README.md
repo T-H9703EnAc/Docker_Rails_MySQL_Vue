@@ -1,7 +1,7 @@
 ########## Vue Routerの追加 ##########
 
 (1) vueのコンテナ(front)に入る 
-```:実行コマンド
+```実行コマンド
 docker exec -it front /bin/bash
 ```
 
