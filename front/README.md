@@ -1,4 +1,5 @@
 ##########Vue Routerの追加##########
+
 (1) docker exec -it front /bin/bash
 
 (2) npm install vue-router@4
@@ -85,4 +86,5 @@ export default router
 npm run serve
 http://localhost:8080/
 http://localhost:8080/hello
+
 ##########Vue Routerここまで##########
