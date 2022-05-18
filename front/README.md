@@ -249,7 +249,7 @@ touch ./src/components/Header.vue
 ```
 
 
-(6) Vue Routerの動作確認
+(6) BootStrap5の動作確認
 ```:実行コマンド
 (実行コマンド)
 
@@ -289,3 +289,198 @@ http://localhost:8080/hello
 ```
 
 ********** BootStrap5ここまで **********
+
+////////// axiosの追加 //////////
+(1) axiosのインストール
+```:実行コマンド
+(実行コマンド)
+
+npm install axios
+
+added 5 packages, changed 373 packages, and audited 963 packages in 6m
+
+8 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+```
+(2) 動作確認用の画面を作成(Search.vue)
+```:実行コマンド
+(実行コマンド)
+
+mkdir ./src/pages/search
+touch ./src/pages/search/Search.vue
+```
+
+```:Search.vue
+(Search.vue)
+<template>
+    <div>
+        <button @click="search" type="button" class="btn btn-primary">検索</button>
+        <table class="table">
+            <thead>
+                <tr>
+                <th scope="col">ID</th>
+                <th scope="col">ユーザ名</th>
+                </tr>
+            </thead>
+            <tbody>   
+                <tr  v-for="item in items" :key="item.message">
+                    <th scope="row">{{item.id}}</th>
+                    <td>{{item.name}}</td>
+                </tr>   
+            </tbody>
+        </table>
+    </div>
+</template>
+<script>
+    import axios from 'axios';
+    export default {
+        data(){
+            return{
+                items: []
+            }
+        },
+        methods: {
+            search (){
+                axios
+                .get('http://localhost:8080/search')
+                .then(
+                    response => {
+                        for (let i=0; i<response.data.length; i++) {
+                            this.items.push(response.data[i]);
+                        }
+                        console.log(this.items);
+                    } 
+                ).catch(
+                    error => {
+                        let errorData1 = {id: 2, name: "Jirou"};
+                        let errorData2 = {id: 3, name: "Saburou"};
+                        this.items.push(errorData1);
+                        this.items.push(errorData2);
+                    }
+                );
+            }
+        }
+    }
+</script>
+
+```
+(3)  ./front/vue_project/src/router/router.js の修正
+```:router.js
+(修正前 router.js)
+
+import { createRouter, createWebHistory } from 'vue-router'
+import Home from '../pages/Home.vue'
+import Hello from '../pages/hello/Hello.vue'
+
+const routes = [
+    { 
+        path: '/', 
+        name: 'Home',
+        component: Home
+    },
+    { 
+        path: '/hello', 
+        name: 'Hello',
+        component: Hello
+    }
+]
+
+const router = createRouter({
+    history: createWebHistory(process.env.BASE_URL),
+    routes
+})
+
+export default router
+```
+
+```:router.js
+(修正後 router.js)
+
+import { createRouter, createWebHistory } from 'vue-router'
+import Home from '../pages/Home.vue'
+import Hello from '../pages/hello/Hello.vue'
+import Search from '../pages/search/Search.vue'
+
+const routes = [
+    { 
+        path: '/', 
+        name: 'Home',
+        component: Home
+    },
+    { 
+        path: '/hello', 
+        name: 'Hello',
+        component: Hello
+    },
+    {
+        path: '/search', 
+        name: 'Search',
+        component: Search
+    }
+]
+
+const router = createRouter({
+    history: createWebHistory(process.env.BASE_URL),
+    routes
+})
+
+export default router
+```
+
+(4) ./front/vue_project/src/components/Header.vue の修正
+```:Header.vue
+(修正前 Header.vue)
+
+<template>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
+            <a class="nav-link" href="/hello">hello</a>
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        </div>
+        </div>
+    </div>
+    </nav>
+</template>
+```
+
+```:Header.vue
+(修正後 Header.vue)
+
+<template>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
+            <a class="nav-link" href="/hello">hello</a>
+            <a class="nav-link" href="/search">search</a>
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        </div>
+        </div>
+    </div>
+    </nav>
+</template>
+```
+
+
+(5) axiosの動作確認
+```:実行コマンド
+(実行コマンド)
+
+npm run serve
+http://localhost:8080/
+http://localhost:8080/search
+```
