@@ -28,7 +28,7 @@
         methods: {
             search (){
                 axios
-                .get('http://localhost:8080/search')
+                .get('http://localhost:3000')
                 .then(
                     response => {
                         for (let i=0; i<response.data.length; i++) {
