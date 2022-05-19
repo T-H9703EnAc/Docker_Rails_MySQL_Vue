@@ -282,9 +282,12 @@ docker system prune -a
 #コントローラの作成
 docker-compose run back rails g controller コントローラー名 メソッド名1 メソッド名2 ...
 
+#コントローラの削除
+docker-compose run back rails d controller コントローラー名
+
 #モデルの作成
 docker-compose run back rails g model モデル名 カラム名1:カラムの型 カラム名2:カラムの型 ...
-
+docker-compose run back rails d model モデル名
 # マイグレーションファイルの実行
 docker-compose run back rails db:migrate
 
