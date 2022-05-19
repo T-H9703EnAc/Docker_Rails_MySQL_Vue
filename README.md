@@ -287,10 +287,15 @@ docker-compose run back rails d controller コントローラー名
 
 #モデルの作成
 docker-compose run back rails g model モデル名 カラム名1:カラムの型 カラム名2:カラムの型 ...
+
+#モデルの削除
 docker-compose run back rails d model モデル名
+
 # マイグレーションファイルの実行
 docker-compose run back rails db:migrate
 
+#routeの確認
+docker-compose run back rails routes
 ```
 
 ・Vueコンテナに入る

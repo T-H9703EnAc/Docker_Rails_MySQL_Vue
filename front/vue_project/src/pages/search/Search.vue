@@ -28,7 +28,7 @@
         methods: {
             search (){
                 axios
-                .get('http://localhost:3000')
+                .get('http://localhost:3000/crud/search')
                 .then(
                     response => {
                         for (let i=0; i<response.data.length; i++) {
