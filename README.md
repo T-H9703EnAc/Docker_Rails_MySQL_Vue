@@ -298,7 +298,7 @@ docker-compose run back rails db:migrate
 #routeの確認
 docker-compose run back rails routes
 
-#seed.rbの実行zikkou
+#seed.rbの実行
 docker-compose run back rails db:seed
 ```
 
