@@ -263,3 +263,36 @@ added 95 packages in 1m
 
 (9) Vue.jsの動作確認
 http://localhost:8080/ 
+
+
+#################### 開発時によく使用するコマンド一覧 ####################
+・Dockerの起動・停止
+```:実行コマンド
+(実行コマンド)
+
+docker-compose down
+docker-compose up -d
+docker system prune -a
+```
+
+・Docker使用時のRailsコマンド
+```:実行コマンド
+(実行コマンド)
+
+#コントローラの作成
+docker-compose run back rails g controller コントローラー名 メソッド名1 メソッド名2 ...
+
+#モデルの作成
+docker-compose run back rails g model モデル名 カラム名1:カラムの型 カラム名2:カラムの型 ...
+
+# マイグレーションファイルの実行
+docker-compose run back rails db:migrate
+
+```
+
+・Vueコンテナに入る
+```:実行コマンド
+(実行コマンド)
+
+docker exec -it front /bin/bash
+```
